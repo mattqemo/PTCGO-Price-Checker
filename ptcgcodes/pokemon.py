@@ -11,8 +11,7 @@ soup = soup.prettify()
 newEntries = dict()
 prevEntries = dict()
 
-i = 0
-while i < (len(soup) - 10):
+for i in range(len(soup) - 10):
     if soup[i:i + 7] == "TCGOSet":
         i = i + 6
         while soup[i] != '\n':
@@ -32,16 +31,12 @@ while i < (len(soup) - 10):
             i = i + 1
         newEntries[title.replace('\n','').strip()] = cost.replace('\n','').strip()
 
-    i = i + 1
 
 #write newEntries to newcodes.txt
 currPrices = open("newcodes.txt","w")
 
 for title in newEntries:
-    currPrices.write(title)
-    currPrices.write('\n')
-    currPrices.write(newEntries[title])
-    currPrices.write('\n')
+    currPrices.write(title + '\n' + newEntries[title] + '\n')
 
 currPrices.close()
 
@@ -69,10 +64,7 @@ for entry in prevEntries:
 #replace old codes with new codes
 currPrices = open("oldcodes.txt","w")
 for entry in newEntries:
-    currPrices.write(entry)
-    currPrices.write('\n')
-    currPrices.write(newEntries[entry])
-    currPrices.write('\n')
+    currPrices.write(entry + '\n' + newEntries[entry] + '\n')
     if prevEntries.get(entry) is None:
         print("Code Added: ", entry)
         print("Price: ", newEntries[entry])
