@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -31,9 +32,10 @@ for i in range(len(soup) - 10):
             i = i + 1
         newEntries[title.replace('\n','').strip()] = cost.replace('\n','').strip()
 
+dir = os.path.dirname(os.path.abspath(__file__))
 
 #write newEntries to newcodes.txt
-currPrices = open("newcodes.txt","w")
+currPrices = open(os.path.join(dir,"newcodes.txt"),"w")
 
 for title in newEntries:
     currPrices.write(title + '\n' + newEntries[title] + '\n')
@@ -41,7 +43,7 @@ for title in newEntries:
 currPrices.close()
 
 #read prevEntries from oldcodes.txt
-with open("oldcodes.txt") as f:
+with open(os.path.join(dir,"oldcodes.txt")) as f:
     i = 0
     for line in f:
         if i % 2 == 0:
@@ -62,7 +64,7 @@ for entry in prevEntries:
         print("-------------------------------")
 
 #replace old codes with new codes
-currPrices = open("oldcodes.txt","w")
+currPrices = open(os.path.join(dir,"oldcodes.txt"),"w")
 for entry in newEntries:
     currPrices.write(entry + '\n' + newEntries[entry] + '\n')
     if prevEntries.get(entry) is None:
