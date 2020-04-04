@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# pokeScript
+
+set -Eeuo pipefail
+set -x
+
+python3 PycharmProjects/ptcgcodes/pokemon.py
