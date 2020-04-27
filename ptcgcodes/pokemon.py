@@ -6,7 +6,7 @@ import csv
 
 URL = 'https://www.professor-oak.com/qrcodes/CodePrices.asp'
 r = requests.get(URL)
-soup = BeautifulSoup(r.content, 'html5lib')
+soup = BeautifulSoup(r.content, 'html.parser')
 soup = soup.prettify()
 
 newEntries = dict()
